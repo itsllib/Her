@@ -188,13 +188,13 @@
         const placeholder = document.querySelector('.placeholder'); // Select the placeholder element
         let heartInterval;
 
-        startButton.addEventListener('mouseenter', () => {
-            heartInterval = setInterval(() => {
-                if (heartCount < maxHearts) {
-                    createHeart();
-                }
-            }, 500); // Create a heart every 500ms
-        });
+        // startButton.addEventListener('mouseenter', () => {
+        //     heartInterval = setInterval(() => {
+        //         if (heartCount < maxHearts) {
+        //             createHeart();
+        //         }
+        //     }, 500); // Create a heart every 500ms
+        // });
 
         startButton.addEventListener('mouseleave', () => {
             clearInterval(heartInterval);
