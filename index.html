@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Content Button</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=YourCustomFont&display=swap'); /* Replace with your font link */
+
+        html, body {
+            height: 100%;
+            margin: 0; /* Reset margin */
+            padding: 0; /* Reset padding */
+        }
+
+        body {
+            font-family: 'YourCustomFont', sans-serif; /* Replace with your font name */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            min-height: 100vh;
+            margin: 0; /* Reset margin */
+            padding: 0; /* Reset padding */
+            background-color: pink; /* Example background color */
+            overflow: hidden; /* Prevent scrollbars */
+        }
+
+        .content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        img#gif {
+            width: 300px; /* Set the desired width */
+            height: auto; /* Maintain aspect ratio */
+            margin-bottom: 20px; /* Add some space below the GIF */
+        }
+
+        button {
+            padding: 15px 30px;
+            font-size: 18px;
+            color: white;
+            background-color: #fe7bbc; /* Example button color */
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for hover effects */
+            margin: 5px;
+        }
+
+        button:hover {
+            background-color: hotpink; /* Change background color on hover */
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Larger shadow on hover */
+        }
+
+        .heart {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: red;
+            transform: rotate(45deg);
+            animation: fly 5s linear;
+            cursor: pointer; /* Change cursor to pointer for hearts */
+            pointer-events: auto; /* Ensure hearts are clickable */
+        }
+
+        .heart::before,
+        .heart::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: red;
+            border-radius: 50%;
+        }
+
+        .heart::before {
+            top: -10px;
+            left: 0;
+        }
+
+        .heart::after {
+            top: 0;
+            left: -10px;
+        }
+
+        @keyframes fly {
+            0% {
+                opacity: 1;
+                transform: translateY(0) rotate(45deg);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-100vh) rotate(45deg);
+            }
+        }
+
+        #skipMusicButton {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            display: none; /* Initially hidden */
+            padding: 10px 20px;
+            font-size: 16px;
+            color: white;
+            background-color: #ff0000; /* Example button color */
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        #skipMusicButton:hover {
+            background-color: #cc0000; /* Change background color on hover */
+        }
+    </style>
+</head>
+<body>
+    <div class="content" id="content">
+        <img id="gif" src="images/hamster-cute.gif" alt="GIF" style="display: block;">
+        <p id="text">Hey, Shirley!</p>
+        <button id="startButton">Click Me</button>
+    </div>
+    <button id="skipMusicButton">Skip Music</button>
+    <audio id="backgroundMusic" loop></audio>
+    <audio id="soundEffect"></audio>
+    <script>
+        const content = {
+            initial: { text: "Which music would you like?:", gif: "", music: "", buttons: [{ text: "K-POP", key: "kpop" }, { text: "Chill", key: "chill" }] },
+            kpop: { text: "Hi, how are you?", gif: "images/hello-cute.gif", music: "music/Perfect Night LE SSERAFIM.mp3", buttons: [{ text: "pretty goooooood", key: "prettygood" }, { text: "not good", key: "notgood" }] },
+            chill: { text: "Hi, how are you?", gif: "images/hello-cite.gif", music: "music/chill.mp3", buttons: [{ text: "pretty goooooood", key: "prettygood" }, { text: "not good", key: "notgood" }] },
+            prettygood: { text: "thats good to hear! having fun in Korea?", gif: "images/yay-hooray.gif", music: "music/prettygood.mp3", buttons: [{ text: "OFC, BEST TIME OF MY LIFE", key: "besttime" }, { text: "no ):", key: "nogood" }] },
+            notgood: { text: "really? if there is something wrong please text me right now", gif: "images/pikachu-worries.gif", music: "music/notgood.mp3", buttons: [{ text: "I have texted you", key: "besttime" }] },
+            okaygood: { text: "Okay, thank you for texting me.", gif: "", music: "music/okaygood.mp3", buttons: [{ text: "Continue", key: "besttime" }] },
+            korea: { text: "Well, how's korea?", gif: "images/sorry.gif", music: "music/korea.mp3", buttons: [{ text: "SUPER DUPER FUN", key: "besttime" }, {text: "no ):", key: "nogood"}] },
+            besttime: { text: "That is what I like to hear!", gif: "images/okay-nod.gif", music: "music/besttime.mp3", buttons: [{ text: "Next", key: "next" }] },
+            next: { text: "Well I heard it is someone's birthday today! Do you know who's?", gif: "images/thinking.gif", music: "music/next.mp3", buttons: [{ text: "YES", key: "yes" }, { text: "I don't have a clue", key: "noclue" }] },
+            noclue: { text: "It is your birthday silly!", gif: "images/pinch.gif", music: "music/noclue.mp3", buttons: [{ text: "Oh, I forgot", key: "birthday" }, { text: "I knew that hehehe", key: "birthday" }] },
+            
+            birthday: { text: "Happy Birthday Shirley!", gif: "images/birthday-cake.gif", music: "music/birthday.mp3", buttons: [{ text: "Thank you!", key: "thankyou" }] },
+            
+            big: { text: "The big two O. Leaving your teens.", gif: "images/20.gif", music: "music/big.mp3", buttons: [{ text: "Join the gang!", key: "jointhegang" }]},
+
+
+            jointhegang: { text: "I wish I could be there in-person", gif: "images/jointhegang.gif", music: "", buttons: [{ text: "Next", key: "nexthug" }]},
+            nexthug: { text: "But I am sending you a virtual hug!", gif: "images/hug.gif", music: "music/nexthug.mp3", buttons: [{ text: "Accept", key: "accept" }, { text: "Reject", key: "reject" }]},
+            accept: { text: "HERE YOU GOOOOOOOO", gif: "images/accept.gif", music: "music/accept.mp3", buttons: [{ text: "Next", key: "haertfelt" }]},
+            reject: { text: "Are you sure?", gif: "images/reject.gif", music: "music/reject.mp3", buttons: [{ text: "Yes I am sure.", key: "amsure" }, { text: "No, I want a hug", key: "accept" }]},
+            amsure: { text: "Are you sure you are sure?", gif: "images/sure.gif", music: "music/sure.mp3", buttons: [{ text: "Yes I am sure that I am sure", key: "amsuresure" }, { text: "You know what, I do want a hug", key: "accept" }]},
+            amsuresure: { text: "I think if you don't want my hug, I don't think you would want to have the rest of what I have in store", gif: "images/okay.gif", music: "music/amsuresure.mp3", buttons: [{ text: "Bye :(", key: "bye" }, { text: "I'm jokinggg, I do want a hug", key: "accept" }]},
+            
+            bye: { text: "Goodbye, Shirley! Have a great day!", gif: "images/bye.gif", music: "music/bye.mp3", buttons: [] },
+            // jazz: { text: "You chose Jazz!", gif: "images/jazz.gif", music: "music/jazz.mp3", buttons: [] }
+        };
+
+        let currentKey = 'initial';
+        let heartCount = 0;
+        const maxHearts = 50;
+
+        const textElement = document.getElementById('text');
+        const gifElement = document.getElementById('gif');
+        const contentDiv = document.getElementById('content');
+        const startButton = document.getElementById('startButton');
+        const backgroundMusic = document.getElementById('backgroundMusic');
+        const soundEffect = document.getElementById('soundEffect');
+        const skipMusicButton = document.getElementById('skipMusicButton');
+        let heartInterval;
+
+        startButton.addEventListener('mouseenter', () => {
+            heartInterval = setInterval(() => {
+                if (heartCount < maxHearts) {
+                    createHeart();
+                }
+            }, 500); // Create a heart every 500ms
+        });
+
+        startButton.addEventListener('mouseleave', () => {
+            clearInterval(heartInterval);
+        });
+
+        startButton.addEventListener('click', () => {
+            clearInterval(heartInterval); // Stop producing hearts when the button is clicked
+            updateContent(currentKey);
+        });
+
+        skipMusicButton.addEventListener('click', () => {
+            backgroundMusic.pause();
+            backgroundMusic.src = "";
+            skipMusicButton.style.display = 'none'; // Hide the button after skipping music
+        });
+
+        function updateContent(key) {
+            const currentContent = content[key];
+            textElement.textContent = currentContent.text;
+
+            // Update GIF
+            if (currentContent.gif) {
+                gifElement.src = currentContent.gif;
+                gifElement.style.display = 'block';
+            } else {
+                gifElement.style.display = 'none';
+            }
+
+            // Update Music
+            if (currentContent.music && backgroundMusic.src !== currentContent.music) {
+                backgroundMusic.src = currentContent.music;
+                backgroundMusic.play();
+                skipMusicButton.style.display = 'block'; // Show the skip music button
+            }
+
+            // Remove existing buttons
+            const buttons = contentDiv.querySelectorAll('button');
+            buttons.forEach(button => button.remove());
+
+            // Add new buttons
+            currentContent.buttons.forEach(buttonData => {
+                const button = document.createElement('button');
+                button.textContent = buttonData.text;
+                button.addEventListener('click', () => {
+                    if (buttonData.key === 'birthday') { // Replace with the actual key
+                        playSoundEffect('sounds/partypopper.mp3'); // Play sound effect
+                    }
+                    updateContent(buttonData.key);
+                });
+                contentDiv.appendChild(button);
+            });
+        }
+
+        function playSoundEffect(src) {
+            soundEffect.src = src;
+            soundEffect.play();
+        }
+
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            heart.style.left = `${Math.random() * 100}vw`;
+            heart.style.animationDuration = `${Math.random() * 2 + 3}s`;
+            document.body.appendChild(heart);
+            heartCount++;
+
+            heart.addEventListener('animationend', () => {
+                heart.remove();
+                heartCount--;
+            });
+
+            heart.addEventListener('click', () => {
+                heart.remove();
+                heartCount--;
+            });
+        }
+    </script>
+</body>
+</html>
