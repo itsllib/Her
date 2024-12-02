@@ -132,8 +132,11 @@
         <div class="placeholder"></div> <!-- Placeholder element -->
     </div>
     <button id="skipMusicButton">Skip Music</button>
-    <audio id="backgroundMusic" loop></audio>
+    <audio id="backgroundMusic" src="path/to/background-music.mp3" loop></audio>
     <audio id="soundEffect"></audio>
+    <video id="videoElement" width="640" height="360" controls style="display: none;">
+        Your browser does not support the video tag.
+    </video>
     <script>
         const content = {
             initial: { text: "Which music would you like?:", gif: "images/music.gif", music: "", buttons: [{ text: "K-POP", key: "kpop" }, { text: "Chill", key: "chill" }] },
@@ -141,8 +144,8 @@
             chill: { text: "Hi, how are you?", gif: "images/how-are-you.gif", music: "music/whereever_u_r.mp3", buttons: [{ text: "pretty goooooood", key: "prettygood" }, { text: "not good", key: "notgood" }] },
             prettygood: { text: "thats good to hear! having fun in Korea?", gif: "images/yay-hooray.gif", music: "", buttons: [{ text: "OFC, BEST TIME OF MY LIFE!!!", key: "besttime" }, { text: "no ):", key: "nogood" }] },
             notgood: { text: "really? if there is something wrong please text or call me right now", gif: "images/pikachu-worries.gif", music: "", buttons: [{ text: "I have talked you", key: "besttime" }] },
-            okaygood: { text: "Okay, thank you for talking to me. Hopefully, you are feeling better!", gif: "images/smile.gif", music: "", buttons: [{ text: "Continue", key: "movingon" }] },
-            korea: { text: "Well, how's korea?", gif: "images/sorry.gif", music: "", buttons: [{ text: "SUPER DUPER FUN", key: "besttime" }, {text: "no ):", key: "nogood"}] },
+            okaygood: { text: "Okay, thank you for talking to me. Hopefully, you are feeling better!", gif: "images/smile.gif", music: "", buttons: [{ text: "Continue", key: "korea" }] },
+            korea: { text: "Well, how's korea?", gif: "images/huh.gif", music: "", buttons: [{ text: "SUPER DUPER FUN", key: "besttime" }, {text: "no ):", key: "nogood"}] },
             besttime: { text: "That is what I like to hear!", gif: "images/okay-nod.gif", music: "", buttons: [{ text: "Next", key: "next" }] },
             next: { text: "Well I heard it is someone's birthday today! Do you know who's?", gif: "images/thinking.gif", music: "", buttons: [{ text: "YES", key: "yes" }, { text: "I don't have a clue", key: "noclue" }] },
             noclue: { text: "It is your birthday silly!", gif: "images/pinch.gif", music: "", buttons: [{ text: "Oh, I forgot", key: "birthday" }, { text: "I knew that hehehe", key: "birthday" }] },
@@ -168,8 +171,13 @@
             long: { text: "It is going to be long", gif: "images/time.gif", music: "", buttons: [{ text: "Next", key: "ready" }]},
             ready: { text: "Are you ready?", gif: "images/excited.gif", music: "", buttons: [{ text: "Yesss", key: "heartfelt" }]},
 
-            heartfelt: { text: "I love you so much. You have brought so much joy into my life.\nYou deserve all the love and happiness in life.\nYou truly are so smart, cute and pretty, like oml, it is out of this world.\n\nEvery moment I wish I could be with you. I never want to leave your side.\nYou have changed my life for the better.\n\nYour cheerfulness is something that I want to always see.\nYour smile brightens up my day.\nYour eyes are so pretty that my heart flutters.\nYour hugs and cuddles bring me so much warmth and comfort that I never want to let go.\n\nYou cannot measure how much I miss you. I will always be by your side.\nIf you ever need someone, know that I will always be there for you.\nTo help, to listen, to comfort I will be there.\nI hope that I can be one of the few that you would go to immediately.\nKnow that regardless I will always support you no matter what.\n\nDon't be afraid to say the truth.\nIt is important that you do say anything that is on your mind.\nDon't hold back.\n\nI love you", gif: "", music: "", buttons: [{ text: "Next", key: "thankful" }]},
+            heartfelt: { text: "I love you so much. You have brought so much joy into my life.\nYou deserve all the love and happiness in life.\nYou truly are so smart, cute and pretty, like oml, it is out of this world.\n\nEvery moment I wish I could be with you. I never want to leave your side.\nYou have changed my life for the better.\n\nYour cheerfulness is something that I want to always see.\nYour smile brightens up my day.\nYour eyes are so pretty that my heart flutters.\nYour hugs and cuddles bring me so much warmth and comfort that I never want to let go.\n\nYou cannot measure how much I miss you. I will always be by your side.\nIf you ever need someone, know that I will always be there for you.\nTo help, to listen, to comfort I will be there.\nI hope that I can be one of the few that you would go to immediately.\nKnow that regardless I will always support you no matter what.\n\nDon't be afraid to say the truth.\nIt is important that you do say anything that is on your mind.\nDon't hold back.\n\nI want to create an infinite amount of memories with you.\n\nI love you", gif: "", music: "", buttons: [{ text: "Next", key: "love" }]},
 
+            love: { text: "I love you", gif: "images/heart.gif", music: "", buttons: [{ text: "Next", key: "video" }]},
+
+            video: { text: "Here's a video for you", gif: "", music: "qweqwe", video: "video2.mp4", buttons: [{ text: "Next", key: "goodbye" }]},
+            goodbye: { text: "I hope you liked it. Text me bananas when you finish it.", gif: "", music: "", buttons: [{text: "Next", key: "end"}] },
+            end: { text: "The end", gif: "images/byebye.gif", music: "", buttons: [] },
             bye: { text: "Goodbye, Shirley! Have a great day!", gif: "images/sad-bye.gif", music: "", buttons: [] },
             // jazz: { tsad-ext: "You chose Jazz!", gif: "images/jazz.gif", music: "music/jazz.mp3", buttons: [] }
         };
@@ -185,8 +193,15 @@
         const backgroundMusic = document.getElementById('backgroundMusic');
         const soundEffect = document.getElementById('soundEffect');
         const skipMusicButton = document.getElementById('skipMusicButton');
+        const videoElement = document.getElementById('videoElement');
         const placeholder = document.querySelector('.placeholder'); // Select the placeholder element
         let heartInterval;
+
+        // Set the volume of the background music to 50%
+        backgroundMusic.volume = 0.4;
+
+        // Set the volume of the sound effect to 75%
+        soundEffect.volume = 0.75;
 
         // startButton.addEventListener('mouseenter', () => {
         //     heartInterval = setInterval(() => {
@@ -206,11 +221,11 @@
             playSoundEffect('sounds/short-pop.mp3'); // Play sound effect for the first button
         });
 
-        skipMusicButton.addEventListener('click', () => {
-            backgroundMusic.pause();
-            backgroundMusic.src = "";
-            skipMusicButton.style.display = 'none'; // Hide the button after skipping music
-        });
+        // skipMusicButton.addEventListener('click', () => {
+        //     backgroundMusic.pause();
+        //     backgroundMusic.src = "";
+        //     skipMusicButton.style.display = 'none'; // Hide the button after skipping music
+        // });
 
         function updateContent(key) {
             const currentContent = content[key];
@@ -228,7 +243,16 @@
             if (currentContent.music && backgroundMusic.src !== currentContent.music) {
                 backgroundMusic.src = currentContent.music;
                 backgroundMusic.play();
-                skipMusicButton.style.display = 'block'; // Show the skip music button
+                // skipMusicButton.style.display = 'block'; // Show the skip music button
+            }
+
+            // Update Video
+            if (currentContent.video) {
+                videoElement.src = currentContent.video;
+                videoElement.style.display = 'block';
+                videoElement.play();
+            } else {
+                videoElement.style.display = 'none';
             }
 
             // Remove existing buttons
