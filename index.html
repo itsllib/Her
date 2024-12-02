@@ -35,8 +35,8 @@
         }
 
         img#gif {
-            width: 300px; /* Set the desired width */
-            height: auto; /* Maintain aspect ratio */
+            width: auto; /* Set the desired width */
+            height: 300px; /* Maintain aspect ratio */
             margin-bottom: 20px; /* Add some space below the GIF */
         }
 
@@ -55,6 +55,12 @@
         button:hover {
             background-color: hotpink; /* Change background color on hover */
             box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Larger shadow on hover */
+        }
+
+        .placeholder {
+            opacity: 0; /* Make the placeholder invisible */
+            height: 50px; /* Ensure it doesn't affect layout height */
+            margin: 5px; /* Same margin as buttons */
         }
 
         .heart {
@@ -120,40 +126,51 @@
 </head>
 <body>
     <div class="content" id="content">
-        <img id="gif" src="images/hamster-cute.gif" alt="GIF" style="display: block;">
+        <img id="gif" src="images/hello-wave.gif" alt="GIF" style="display: block;">
         <p id="text">Hey, Shirley!</p>
         <button id="startButton">Click Me</button>
+        <div class="placeholder"></div> <!-- Placeholder element -->
     </div>
     <button id="skipMusicButton">Skip Music</button>
     <audio id="backgroundMusic" loop></audio>
     <audio id="soundEffect"></audio>
     <script>
         const content = {
-            initial: { text: "Which music would you like?:", gif: "", music: "", buttons: [{ text: "K-POP", key: "kpop" }, { text: "Chill", key: "chill" }] },
-            kpop: { text: "Hi, how are you?", gif: "images/hello-cute.gif", music: "music/Perfect Night LE SSERAFIM.mp3", buttons: [{ text: "pretty goooooood", key: "prettygood" }, { text: "not good", key: "notgood" }] },
-            chill: { text: "Hi, how are you?", gif: "images/hello-cite.gif", music: "music/chill.mp3", buttons: [{ text: "pretty goooooood", key: "prettygood" }, { text: "not good", key: "notgood" }] },
-            prettygood: { text: "thats good to hear! having fun in Korea?", gif: "images/yay-hooray.gif", music: "music/prettygood.mp3", buttons: [{ text: "OFC, BEST TIME OF MY LIFE", key: "besttime" }, { text: "no ):", key: "nogood" }] },
-            notgood: { text: "really? if there is something wrong please text me right now", gif: "images/pikachu-worries.gif", music: "music/notgood.mp3", buttons: [{ text: "I have texted you", key: "besttime" }] },
-            okaygood: { text: "Okay, thank you for texting me.", gif: "", music: "music/okaygood.mp3", buttons: [{ text: "Continue", key: "besttime" }] },
+            initial: { text: "Which music would you like?:", gif: "images/music.gif", music: "", buttons: [{ text: "K-POP", key: "kpop" }, { text: "Chill", key: "chill" }] },
+            kpop: { text: "Hi, how are you?", gif: "images/how-are-you.gif", music: "music/Perfect Night LE SSERAFIM.mp3", buttons: [{ text: "pretty goooooood", key: "prettygood" }, { text: "not good", key: "notgood" }] },
+            chill: { text: "Hi, how are you?", gif: "images/how-are-you.gif", music: "music/chill.mp3", buttons: [{ text: "pretty goooooood", key: "prettygood" }, { text: "not good", key: "notgood" }] },
+            prettygood: { text: "thats good to hear! having fun in Korea?", gif: "images/yay-hooray.gif", music: "music/prettygood.mp3", buttons: [{ text: "OFC, BEST TIME OF MY LIFE!!!", key: "besttime" }, { text: "no ):", key: "nogood" }] },
+            notgood: { text: "really? if there is something wrong please text or call me right now", gif: "images/pikachu-worries.gif", music: "music/notgood.mp3", buttons: [{ text: "I have talked you", key: "besttime" }] },
+            okaygood: { text: "Okay, thank you for talking to me. Hopefully, you are feeling better!", gif: "images/smile.gif", music: "music/okaygood.mp3", buttons: [{ text: "Continue", key: "movingon" }] },
             korea: { text: "Well, how's korea?", gif: "images/sorry.gif", music: "music/korea.mp3", buttons: [{ text: "SUPER DUPER FUN", key: "besttime" }, {text: "no ):", key: "nogood"}] },
             besttime: { text: "That is what I like to hear!", gif: "images/okay-nod.gif", music: "music/besttime.mp3", buttons: [{ text: "Next", key: "next" }] },
             next: { text: "Well I heard it is someone's birthday today! Do you know who's?", gif: "images/thinking.gif", music: "music/next.mp3", buttons: [{ text: "YES", key: "yes" }, { text: "I don't have a clue", key: "noclue" }] },
             noclue: { text: "It is your birthday silly!", gif: "images/pinch.gif", music: "music/noclue.mp3", buttons: [{ text: "Oh, I forgot", key: "birthday" }, { text: "I knew that hehehe", key: "birthday" }] },
             
-            birthday: { text: "Happy Birthday Shirley!", gif: "images/birthday-cake.gif", music: "music/birthday.mp3", buttons: [{ text: "Thank you!", key: "thankyou" }] },
+            yes: { text: "YEAH IT'S YOUR BIRTHDAY!", gif: "images/couple-dancing.gif", music: "music/yes.mp3", buttons: [{ text: "YEAHHH!!!", key: "birthday"}] },
+
+
+            birthday: { text: "Happy Birthday Shirley!", gif: "images/birthday-cake.gif", music: "music/birthday.mp3", buttons: [{ text: "Continue", key: "big" }] },
             
             big: { text: "The big two O. Leaving your teens.", gif: "images/20.gif", music: "music/big.mp3", buttons: [{ text: "Join the gang!", key: "jointhegang" }]},
 
+            nogood: { text: "That is not what I like to hear. Text or call me, I am all ears.", gif: "images/concerned-cute.gif", music: "music/nogood.mp3", buttons: [{ text: "I have talked to you.", key: "okaygood" }] },
 
-            jointhegang: { text: "I wish I could be there in-person", gif: "images/jointhegang.gif", music: "", buttons: [{ text: "Next", key: "nexthug" }]},
-            nexthug: { text: "But I am sending you a virtual hug!", gif: "images/hug.gif", music: "music/nexthug.mp3", buttons: [{ text: "Accept", key: "accept" }, { text: "Reject", key: "reject" }]},
-            accept: { text: "HERE YOU GOOOOOOOO", gif: "images/accept.gif", music: "music/accept.mp3", buttons: [{ text: "Next", key: "haertfelt" }]},
-            reject: { text: "Are you sure?", gif: "images/reject.gif", music: "music/reject.mp3", buttons: [{ text: "Yes I am sure.", key: "amsure" }, { text: "No, I want a hug", key: "accept" }]},
-            amsure: { text: "Are you sure you are sure?", gif: "images/sure.gif", music: "music/sure.mp3", buttons: [{ text: "Yes I am sure that I am sure", key: "amsuresure" }, { text: "You know what, I do want a hug", key: "accept" }]},
-            amsuresure: { text: "I think if you don't want my hug, I don't think you would want to have the rest of what I have in store", gif: "images/okay.gif", music: "music/amsuresure.mp3", buttons: [{ text: "Bye :(", key: "bye" }, { text: "I'm jokinggg, I do want a hug", key: "accept" }]},
+            jointhegang: { text: "I wish I could be there in-person", gif: "images/sad-happy.gif", music: "", buttons: [{ text: "Next", key: "nexthug" }]},
+            nexthug: { text: "But I am sending you a virtual hug!", gif: "images/offer-hug.gif", music: "music/nexthug.mp3", buttons: [{ text: "Accept", key: "accept" }, { text: "Reject", key: "reject" }]},
+            accept: { text: "HERE YOU GOOOOOOOO", gif: "images/love-hug.gif", music: "music/accept.mp3", buttons: [{ text: "Next", key: "goodday" }]},
+            reject: { text: "Are you sure?", gif: "images/sad.gif", music: "music/reject.mp3", buttons: [{ text: "Yes I am sure.", key: "amsure" }, { text: "No, I want a hug", key: "accept" }]},
+            amsure: { text: "Are you sure you are sure?", gif: "images/crying.gif", music: "music/sure.mp3", buttons: [{ text: "Yes I am sure that I am sure", key: "amsuresure" }, { text: "You know what, I do want a hug", key: "accept" }]},
+            amsuresure: { text: "I think if you don't want my hug, I don't think you would want to have the rest of what I have in store", gif: "images/mad-sad.gif", music: "music/amsuresure.mp3", buttons: [{ text: "Bye :(", key: "bye" }, { text: "I'm jokinggg, I do want a hug", key: "accept" }]},
             
-            bye: { text: "Goodbye, Shirley! Have a great day!", gif: "images/bye.gif", music: "music/bye.mp3", buttons: [] },
-            // jazz: { text: "You chose Jazz!", gif: "images/jazz.gif", music: "music/jazz.mp3", buttons: [] }
+            goodday: { text: "I hope you have the best day!", gif: "images/good-day.gif", music: "music/goodday.mp3", buttons: [{ text: "Next", key: "somethingtosay" }]},
+            somethingtosay: { text: "I have something to tell you", gif: "images/something-to-say.gif", music: "music/somethingtosay.mp3", buttons: [{ text: "Next", key: "long" }]},
+            long: { text: "It is going to be long", gif: "images/long-story.gif", music: "music/long.mp3", buttons: [{ text: "Next", key: "ready" }]},
+            ready: { text: "Are you ready?", gif: "images/ready.gif", music: "music/ready.mp3", buttons: [{ text: "Yesss", key: "heartfelt" }]},
+
+
+            bye: { text: "Goodbye, Shirley! Have a great day!", gif: "images/sad-bye.gif", music: "music/bye.mp3", buttons: [] },
+            // jazz: { tsad-ext: "You chose Jazz!", gif: "images/jazz.gif", music: "music/jazz.mp3", buttons: [] }
         };
 
         let currentKey = 'initial';
@@ -167,6 +184,7 @@
         const backgroundMusic = document.getElementById('backgroundMusic');
         const soundEffect = document.getElementById('soundEffect');
         const skipMusicButton = document.getElementById('skipMusicButton');
+        const placeholder = document.querySelector('.placeholder'); // Select the placeholder element
         let heartInterval;
 
         startButton.addEventListener('mouseenter', () => {
@@ -184,6 +202,7 @@
         startButton.addEventListener('click', () => {
             clearInterval(heartInterval); // Stop producing hearts when the button is clicked
             updateContent(currentKey);
+            playSoundEffect('sounds/short-pop.mp3'); // Play sound effect for the first button
         });
 
         skipMusicButton.addEventListener('click', () => {
@@ -194,7 +213,7 @@
 
         function updateContent(key) {
             const currentContent = content[key];
-            textElement.textContent = currentContent.text;
+            textElement.innerHTML = currentContent.text.replace(/\n/g, '<br>'); // Replace newline characters with <br> tags
 
             // Update GIF
             if (currentContent.gif) {
@@ -222,11 +241,20 @@
                 button.addEventListener('click', () => {
                     if (buttonData.key === 'birthday') { // Replace with the actual key
                         playSoundEffect('sounds/partypopper.mp3'); // Play sound effect
+                    } else {
+                        playSoundEffect('sounds/short-pop.mp3'); // Play sound effect
                     }
                     updateContent(buttonData.key);
                 });
                 contentDiv.appendChild(button);
             });
+
+            // Show or hide the placeholder based on the number of buttons
+            if (currentContent.buttons.length === 1) {
+                placeholder.style.display = 'block'; // Show the placeholder
+            } else {
+                placeholder.style.display = 'none'; // Hide the placeholder
+            }
         }
 
         function playSoundEffect(src) {
