@@ -137,39 +137,40 @@
     <script>
         const content = {
             initial: { text: "Which music would you like?:", gif: "images/music.gif", music: "", buttons: [{ text: "K-POP", key: "kpop" }, { text: "Chill", key: "chill" }] },
-            kpop: { text: "Hi, how are you?", gif: "images/how-are-you.gif", music: "music/Perfect Night LE SSERAFIM.mp3", buttons: [{ text: "pretty goooooood", key: "prettygood" }, { text: "not good", key: "notgood" }] },
-            chill: { text: "Hi, how are you?", gif: "images/how-are-you.gif", music: "music/chill.mp3", buttons: [{ text: "pretty goooooood", key: "prettygood" }, { text: "not good", key: "notgood" }] },
-            prettygood: { text: "thats good to hear! having fun in Korea?", gif: "images/yay-hooray.gif", music: "music/prettygood.mp3", buttons: [{ text: "OFC, BEST TIME OF MY LIFE!!!", key: "besttime" }, { text: "no ):", key: "nogood" }] },
-            notgood: { text: "really? if there is something wrong please text or call me right now", gif: "images/pikachu-worries.gif", music: "music/notgood.mp3", buttons: [{ text: "I have talked you", key: "besttime" }] },
-            okaygood: { text: "Okay, thank you for talking to me. Hopefully, you are feeling better!", gif: "images/smile.gif", music: "music/okaygood.mp3", buttons: [{ text: "Continue", key: "movingon" }] },
-            korea: { text: "Well, how's korea?", gif: "images/sorry.gif", music: "music/korea.mp3", buttons: [{ text: "SUPER DUPER FUN", key: "besttime" }, {text: "no ):", key: "nogood"}] },
-            besttime: { text: "That is what I like to hear!", gif: "images/okay-nod.gif", music: "music/besttime.mp3", buttons: [{ text: "Next", key: "next" }] },
-            next: { text: "Well I heard it is someone's birthday today! Do you know who's?", gif: "images/thinking.gif", music: "music/next.mp3", buttons: [{ text: "YES", key: "yes" }, { text: "I don't have a clue", key: "noclue" }] },
-            noclue: { text: "It is your birthday silly!", gif: "images/pinch.gif", music: "music/noclue.mp3", buttons: [{ text: "Oh, I forgot", key: "birthday" }, { text: "I knew that hehehe", key: "birthday" }] },
+            kpop: { text: "Hi, how are you?", gif: "images/how-are-you.gif", music: "music/aespa-flowers.mp3", buttons: [{ text: "pretty goooooood", key: "prettygood" }, { text: "not good", key: "notgood" }] },
+            chill: { text: "Hi, how are you?", gif: "images/how-are-you.gif", music: "music/whereever_u_r.mp3", buttons: [{ text: "pretty goooooood", key: "prettygood" }, { text: "not good", key: "notgood" }] },
+            prettygood: { text: "thats good to hear! having fun in Korea?", gif: "images/yay-hooray.gif", music: "", buttons: [{ text: "OFC, BEST TIME OF MY LIFE!!!", key: "besttime" }, { text: "no ):", key: "nogood" }] },
+            notgood: { text: "really? if there is something wrong please text or call me right now", gif: "images/pikachu-worries.gif", music: "", buttons: [{ text: "I have talked you", key: "besttime" }] },
+            okaygood: { text: "Okay, thank you for talking to me. Hopefully, you are feeling better!", gif: "images/smile.gif", music: "", buttons: [{ text: "Continue", key: "movingon" }] },
+            korea: { text: "Well, how's korea?", gif: "images/sorry.gif", music: "", buttons: [{ text: "SUPER DUPER FUN", key: "besttime" }, {text: "no ):", key: "nogood"}] },
+            besttime: { text: "That is what I like to hear!", gif: "images/okay-nod.gif", music: "", buttons: [{ text: "Next", key: "next" }] },
+            next: { text: "Well I heard it is someone's birthday today! Do you know who's?", gif: "images/thinking.gif", music: "", buttons: [{ text: "YES", key: "yes" }, { text: "I don't have a clue", key: "noclue" }] },
+            noclue: { text: "It is your birthday silly!", gif: "images/pinch.gif", music: "", buttons: [{ text: "Oh, I forgot", key: "birthday" }, { text: "I knew that hehehe", key: "birthday" }] },
             
-            yes: { text: "YEAH IT'S YOUR BIRTHDAY!", gif: "images/couple-dancing.gif", music: "music/yes.mp3", buttons: [{ text: "YEAHHH!!!", key: "birthday"}] },
+            yes: { text: "YEAH IT'S YOUR BIRTHDAY!", gif: "images/couple-dancing.gif", music: "", buttons: [{ text: "YEAHHH!!!", key: "birthday"}] },
 
 
-            birthday: { text: "Happy Birthday Shirley!", gif: "images/birthday-cake.gif", music: "music/birthday.mp3", buttons: [{ text: "Continue", key: "big" }] },
+            birthday: { text: "Happy Birthday Shirley!", gif: "images/birthday-cake.gif", music: "", buttons: [{ text: "Continue", key: "big" }] },
             
-            big: { text: "The big two O. Leaving your teens.", gif: "images/20.gif", music: "music/big.mp3", buttons: [{ text: "Join the gang!", key: "jointhegang" }]},
+            big: { text: "The big two O. Leaving your teens.", gif: "images/20.gif", music: "", buttons: [{ text: "Join the gang!", key: "jointhegang" }]},
 
-            nogood: { text: "That is not what I like to hear. Text or call me, I am all ears.", gif: "images/concerned-cute.gif", music: "music/nogood.mp3", buttons: [{ text: "I have talked to you.", key: "okaygood" }] },
+            nogood: { text: "That is not what I like to hear. Text or call me, I am all ears.", gif: "images/concerned-cute.gif", music: "", buttons: [{ text: "I have talked to you.", key: "okaygood" }] },
 
             jointhegang: { text: "I wish I could be there in-person", gif: "images/sad-happy.gif", music: "", buttons: [{ text: "Next", key: "nexthug" }]},
-            nexthug: { text: "But I am sending you a virtual hug!", gif: "images/offer-hug.gif", music: "music/nexthug.mp3", buttons: [{ text: "Accept", key: "accept" }, { text: "Reject", key: "reject" }]},
-            accept: { text: "HERE YOU GOOOOOOOO", gif: "images/love-hug.gif", music: "music/accept.mp3", buttons: [{ text: "Next", key: "goodday" }]},
-            reject: { text: "Are you sure?", gif: "images/sad.gif", music: "music/reject.mp3", buttons: [{ text: "Yes I am sure.", key: "amsure" }, { text: "No, I want a hug", key: "accept" }]},
-            amsure: { text: "Are you sure you are sure?", gif: "images/crying.gif", music: "music/sure.mp3", buttons: [{ text: "Yes I am sure that I am sure", key: "amsuresure" }, { text: "You know what, I do want a hug", key: "accept" }]},
+            nexthug: { text: "But I am sending you a virtual hug!", gif: "images/offer-hug.gif", music: "", buttons: [{ text: "Accept", key: "accept" }, { text: "Reject", key: "reject" }]},
+            accept: { text: "HERE YOU GOOOOOOOO", gif: "images/love-hug.gif", music: "", buttons: [{ text: "Next", key: "goodday" }]},
+            reject: { text: "Are you sure?", gif: "images/sad.gif", music: "", buttons: [{ text: "Yes I am sure.", key: "amsure" }, { text: "No, I want a hug", key: "accept" }]},
+            amsure: { text: "Are you sure you are sure?", gif: "images/crying.gif", music: "", buttons: [{ text: "Yes I am sure that I am sure", key: "amsuresure" }, { text: "You know what, I do want a hug", key: "accept" }]},
             amsuresure: { text: "I think if you don't want my hug, I don't think you would want to have the rest of what I have in store", gif: "images/mad-sad.gif", music: "music/amsuresure.mp3", buttons: [{ text: "Bye :(", key: "bye" }, { text: "I'm jokinggg, I do want a hug", key: "accept" }]},
             
-            goodday: { text: "I hope you have the best day!", gif: "images/good-day.gif", music: "music/goodday.mp3", buttons: [{ text: "Next", key: "somethingtosay" }]},
-            somethingtosay: { text: "I have something to tell you", gif: "images/something-to-say.gif", music: "music/somethingtosay.mp3", buttons: [{ text: "Next", key: "long" }]},
-            long: { text: "It is going to be long", gif: "images/long-story.gif", music: "music/long.mp3", buttons: [{ text: "Next", key: "ready" }]},
-            ready: { text: "Are you ready?", gif: "images/ready.gif", music: "music/ready.mp3", buttons: [{ text: "Yesss", key: "heartfelt" }]},
+            goodday: { text: "I hope you have the best day!", gif: "images/smiles-pleasure.gif", music: "", buttons: [{ text: "Next", key: "somethingtosay" }]},
+            somethingtosay: { text: "I have something to tell you", gif: "images/giggle.gif", music: "", buttons: [{ text: "Next", key: "long" }]},
+            long: { text: "It is going to be long", gif: "images/time.gif", music: "", buttons: [{ text: "Next", key: "ready" }]},
+            ready: { text: "Are you ready?", gif: "images/excited.gif", music: "", buttons: [{ text: "Yesss", key: "heartfelt" }]},
 
+            heartfelt: { text: "I love you so much. You have brought so much joy into my life.\nYou deserve all the love and happiness in life.\nYou truly are so smart, cute and pretty, like oml, it is out of this world.\n\nEvery moment I wish I could be with you. I never want to leave your side.\nYou have changed my life for the better.\n\nYour cheerfulness is something that I want to always see.\nYour smile brightens up my day.\nYour eyes are so pretty that my heart flutters.\nYour hugs and cuddles bring me so much warmth and comfort that I never want to let go.\n\nYou cannot measure how much I miss you. I will always be by your side.\nIf you ever need someone, know that I will always be there for you.\nTo help, to listen, to comfort I will be there.\nI hope that I can be one of the few that you would go to immediately.\nKnow that regardless I will always support you no matter what.\n\nDon't be afraid to say the truth.\nIt is important that you do say anything that is on your mind.\nDon't hold back.\n\nI love you", gif: "", music: "", buttons: [{ text: "Next", key: "thankful" }]},
 
-            bye: { text: "Goodbye, Shirley! Have a great day!", gif: "images/sad-bye.gif", music: "music/bye.mp3", buttons: [] },
+            bye: { text: "Goodbye, Shirley! Have a great day!", gif: "images/sad-bye.gif", music: "", buttons: [] },
             // jazz: { tsad-ext: "You chose Jazz!", gif: "images/jazz.gif", music: "music/jazz.mp3", buttons: [] }
         };
 
@@ -234,6 +235,12 @@
             const buttons = contentDiv.querySelectorAll('button');
             buttons.forEach(button => button.remove());
 
+            // Remove existing placeholder
+            const existingPlaceholder = contentDiv.querySelector('.placeholder');
+            if (existingPlaceholder) {
+                existingPlaceholder.remove();
+            }
+
             // Add new buttons
             currentContent.buttons.forEach(buttonData => {
                 const button = document.createElement('button');
@@ -249,12 +256,23 @@
                 contentDiv.appendChild(button);
             });
 
+            // Create or select the placeholder element
+            let placeholder = contentDiv.querySelector('.placeholder');
+            if (!placeholder) {
+                placeholder = document.createElement('div');
+                placeholder.classList.add('placeholder');
+                placeholder.textContent = 'Placeholder text'; // Set your placeholder text here
+            }
+
             // Show or hide the placeholder based on the number of buttons
             if (currentContent.buttons.length === 1) {
                 placeholder.style.display = 'block'; // Show the placeholder
             } else {
                 placeholder.style.display = 'none'; // Hide the placeholder
             }
+
+            // Append the placeholder to the contentDiv
+            contentDiv.appendChild(placeholder);
         }
 
         function playSoundEffect(src) {
